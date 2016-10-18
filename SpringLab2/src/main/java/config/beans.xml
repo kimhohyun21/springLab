@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	#빈(Bean) 
+		1. 개념
+			1) 스프링이 IoC 방식으로 관리하는 객체
+				- 스프링이 직접 생성과 제어를 담당하는 객체
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	<bean id="hello" class="myspring.di.xml.Hello">
+		<!-- Setter Injection ==> <property> 태그 활용 -->
+		<!-- setName(String name) 호출해서 단순 값 등록 -->
+		<property name="name" value="Spring"/>
+		<!-- setPrint(Printer printer) 호출해서 객체 값 등록-->
+		<property name="printer" ref="stringPrinter"></property>
+	</bean>
+	<bean id="stringPrinter" class="myspring.di.xml.StringPrinter"/>
+	<bean id="consolePrinter" class="myspring.di.xml.ConsolePrinter"/>
+</beans>
