@@ -9,6 +9,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	<!-- 
+		#Collection 타입을 XML로 작성하여 해당 프로퍼티에 주입
+	 -->
+	<bean id="hello3" class="myspring.di.xml.Hello">
+		<property name="names">
+			<list>
+				<value>1.Spring</value>
+				<value>2.IoC</value>
+				<value>3.DI</value>
+			</list>
+		</property>
+	</bean>  
+	<!-- 
+		#Constructor Injection : <Constructor-arg> 태그
+	 -->
+	<bean id="hello2" class="myspring.di.xml.Hello">
+		<constructor-arg index="0" value="springIoC"/>
+	 	<constructor-arg index="1" ref="stringPrinter"/>
+	</bean>
 	<bean id="hello" class="myspring.di.xml.Hello">
 		<!-- Setter Injection ==> <property> 태그 활용 -->
 		<!-- setName(String name) 호출해서 단순 값 등록 -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	<!-- 
+		#DI
+			1. Setter DI : setXxx (값)
+			2. 생성자 DI : A(String name)
+			3. 메서드 호출 
+				init-method : 객체생성 후 호출
+				destroy-method : 객체 소멸 시 호출
+				factory-method :  static 메소드 호출
+			
+		#IoC컨테이너 (Spring의 핵심) : 클래스 관리자
+			BeanFactory 
+				|
+			ApplicationContext : DI, AOP
+				|
+			WebApplicationContext : DI, AOP, Web(MVC)
+				==> 값을 주입(DI)
+					DL(Lookup) : 클래스를 찾기 << 예전에 EJB에서 사용했었음 : getBean()의 의미를 가짐			
+	 -->
+	<bean id="sal2" class="com.sist.di4.Sawon" 
+		p:sabun="1" 
+		p:name="감동훈" 
+		p:dept="영업부" 
+		init-method="init"
+	/>
+	<bean id="sal" class="com.sist.di4.Sawon">
+		<property name="sabun">
+			<value>2</value>
+		</property>
+		<property name="name" value="김호현"/>
+		<property name="dept" value="기획부"/>
+	</bean>	
+</beans>

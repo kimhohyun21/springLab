@@ -34,17 +34,27 @@ public class HelloBeanTest {
 		
 		//2. Hello Bean 가져오기
 		Hello hello=(Hello) context.getBean("hello");
-		System.out.println(hello.sayHello());
+		System.out.println("1."+hello.sayHello());
 		hello.print();
 		
 		//3. StringPrinter Bean가져오기
 		Printer string=context.getBean("stringPrinter", Printer.class);
-		System.out.println(string);
+		System.out.println("2."+string);
 		
 		//4. ConsolePrinter Bean가져오기
 		Printer console=context.getBean("consolePrinter", Printer.class);
-		console.print(hello.sayHello());
+		console.print("3."+hello.sayHello());
 		
+		//Constructor-arg 태그 테스트
+		Hello hello2=(Hello) context.getBean("hello2");
+		System.out.println("4."+hello2.sayHello());
 		
+		//Collection 타입 주입
+		Hello hello3=(Hello) context.getBean("hello3");
+		
+		//Singleton 적용 확인
+		Hello hello2_1=context.getBean("hello3", Hello.class);
+		System.out.print("싱글톤 적용여부 : ");
+		System.out.println(hello3 == hello2_1); // true, false 출력
 	}
 }

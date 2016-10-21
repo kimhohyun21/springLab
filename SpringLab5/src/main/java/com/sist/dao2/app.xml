@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<util:properties id="db" location="classpath:db.properties"/>
+	<!-- 
+		#Spring Bean Configuration 파일(.xml)에 기술하는 내용 
+		: 메타 데이터
+			1. properties 파일 읽기
+			2. AOP 설정
+			3. DI(의존성 주입) : annotation
+				==> 3번의 경우 
+					<context:annotation-config/>
+			4. 패키지별로 클래스 등록
+			5. DataSource 설정(정보 설정)
+			6. Mybatis 설정
+			
+		==> 이 정보들을 다루는 방법은
+			1) XML
+			2) Annotation
+			3) XML + Annotation
+			
+		*여기는 XML로 다룰 예정*
+	 -->
+	<bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="#{db['driver'] }"
+		p:url="#{db['url']}"
+		p:username="#{db['username']}"
+		p:password="#{db['password']}"
+	/>
+	
+	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="ds"
+		p:configLocation="classpath:config.xml"
+	/>
+	
+	<bean id="sqlSessionTemplete" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="ssf"/>
+	</bean>
+		
+	<bean id="dao" class="com.sist.dao2.EmpDAO"
+		p:sqlSessionTemplate-ref="sqlSessionTemplete"
+	/>
+
+	<bean id="empMain" class="com.sist.dao2.EmpMain"
+		p:dao-ref="dao"
+	/>
+
+	
+
+
+</beans>

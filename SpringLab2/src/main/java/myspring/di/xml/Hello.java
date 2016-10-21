@@ -1,5 +1,7 @@
 package myspring.di.xml;
 
+import java.util.*;
+
 /*
  * #IoC(Inversion of Control)
  * 	1. 개념
@@ -53,9 +55,21 @@ package myspring.di.xml;
  * 		조립기 ===== 생성 ====> 클래스			  beans.xml =생성=> StringPrinter ConsolePrinter	
  * 		
  */
+
 public class Hello {
 	private String name;
 	private Printer printer;
+	private List<String> names; //컬렉션(Collection) 타입값 주입
+	
+	public Hello(){
+		System.out.println("Hello 객체 생성");
+	}
+	
+	public Hello(String name, Printer printer){
+		this.name=name;
+		this.printer=printer;
+		System.out.println("Hello 객체 생성-생성자 오버로딩");
+	}
 	
 	public String getName() {
 		return name;
@@ -68,8 +82,14 @@ public class Hello {
 	}
 	public void setPrinter(Printer printer) {
 		this.printer = printer;
+	}	
+	public List<String> getNames() {
+		return names;
 	}
-	
+	public void setNames(List<String> names) {
+		this.names = names;
+	}
+
 	
 	public String sayHello(){
 		return "Hello "+name;

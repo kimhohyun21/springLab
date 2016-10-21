@@ -3,6 +3,8 @@ package myspring.di.xml;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -38,7 +40,7 @@ public class HelloBeanJunitTest {
 	public void bean1(){
 		//2.getBean() 호출
 		Hello hello=(Hello) context.getBean("hello");
-		
+		System.out.println();
 		//3. sayHello() 호출
 		assertEquals("Hello Spring", hello.sayHello());
 		//assertEquals(a, b) : 객체 a와 b가 동일 값인지 확인
@@ -52,7 +54,7 @@ public class HelloBeanJunitTest {
 	public void bean2(){
 		Printer string=(Printer) context.getBean("stringPrinter");
 		Printer string2=context.getBean("stringPrinter", Printer.class);
-		
+		System.out.println();
 		/*
 		 * assertSame(a, b) : 객체 a, b의 객체 자체가 동일한지 확인 (==)
 		 * assertEquals(a, b) : 객체 a, b의 값이 동일한지 확인
@@ -60,4 +62,17 @@ public class HelloBeanJunitTest {
 		assertSame(string, string2);
 	}
 	
+	@Test
+	public void bean3(){
+		//getBean() 호출
+		Hello hello=(Hello) context.getBean("hello3");
+		System.out.println();
+		assertEquals(3, hello.getNames().size());
+		
+		List<String> list=hello.getNames();
+		
+		for(String value : list){
+			System.out.println(value);
+		}
+	}
 }

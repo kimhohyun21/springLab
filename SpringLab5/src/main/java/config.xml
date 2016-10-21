@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.sist.dao2.EmpVO" alias="Emp"/>
+		<typeAlias type="com.sist.dao3.EmpVO" alias="Emp2"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/sist/dao2/emp-mapper.xml"/>
+		<mapper resource="com/sist/dao3/emp-mapper.xml"/>
+	</mappers>
+</configuration>
