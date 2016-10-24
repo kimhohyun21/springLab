@@ -4,7 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Select;
 
 public interface BoardMapper {
-	@Select("SELECT no, name, subject, regdate, hit, group_tab, num "
+	@Select("SELECT no, name, subject, regdate, hit, group_tab, TO_CHAR(regdate, 'YYYY-mm-DD'), num "
 			+ "FROM (SELECT no, name, subject, regdate, hit, group_tab, ROWNUM as num "
 			+ "FROM (SELECT no, name, subject, regdate, hit, group_tab "
 			+ "FROM board ORDER BY group_id DESC, group_step ASC))"

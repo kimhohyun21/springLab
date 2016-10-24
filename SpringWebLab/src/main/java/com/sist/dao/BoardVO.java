@@ -22,6 +22,21 @@ public class BoardVO {
 	private int root;
 	private int depth;
 	
+	private String today;
+	private String dbday;
+	
+	public String getToday() {
+		return today;
+	}
+	public void setToday(String today) {
+		this.today = today;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	private String msg;
 	
 	public int getNo() {
