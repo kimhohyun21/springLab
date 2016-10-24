@@ -1,9 +1,11 @@
-package com.sist.dao;
+package com.sist.web;
 
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.sist.dao.*;
 
 @Repository
 public class BoardDAO {

@@ -34,7 +34,7 @@
 	
 	<!-- mapper 생성 -->
 	<bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean"
-		p:mapperInterface="com.sist.BoardMapper"
+		p:mapperInterface="com.sist.dao.BoardMapper"
 		p:sqlSessionFactory="ssf"
 	/>
 	
