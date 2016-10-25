@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:annotation-config/>
+	<context:component-scan base-package="com.sist.*"/>
+	<!-- 
+		1. lib (pom.xml)
+		2. 설정파일 → web.xml, mvc-servlet.xml ...
+		3. Model
+		4. JSP
+	 -->
+	 
+	 <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+	 	p:driverClassName="oracle.jdbc.driver.OracleDriver"
+	 	p:url="jdbc:oracle:thin:@211.238.142.88:1521:ORCL"
+	 	p:username="scott"
+	 	p:password="tiger"
+	 	p:maxActive="10"
+	 	p:maxIdle="5"
+	 	p:maxWait="-1"
+	 />
+	 
+	 <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+	 	p:dataSource-ref="ds"
+	 />
+	 
+	 <bean id="mapper" class="org.mybatis.spring.mapper.MapperFactoryBean"
+	 	p:mapperInterface="com.sist.dao.BoardMapper"
+	 	p:sqlSessionFactory-ref="ssf"
+	 />
+	 
+	 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+	 	p:prefix="/board/"
+	 	p:suffix=".jsp"
+	 />
+	 
+	 <!-- 
+	 	※ ViewResolver 설정
+	 	  - ViewResolver는 Controller의 실행 결과를 어떤 View에서 보여줄 것인지 결정하는 기능 제공 
+	 	  - InternalResourceViewResolver 는 JSP를 사용하여 view를 생성
+	 	    1) prefix : Controller가 리턴한 view 이름 앞에 붙을 접두어
+	 	    2) suffix : Controller가 리턴한 view 이름 뒤에 붙을 확장자
+	 	    → ex. Controller가 리턴한 view 이름 으로 "hello"를 리턴했다면, 
+	 	          InternalResourceViewResolver에 의해 사용되는 View는 "/hello.jsp"가 됨.  
+	  -->
+</beans>
