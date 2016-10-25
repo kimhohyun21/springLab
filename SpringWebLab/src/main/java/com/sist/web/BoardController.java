@@ -35,6 +35,11 @@ public class BoardController {
 		
 		List<BoardVO> list=dao.boardListData(map);
 		
+		for(BoardVO vo : list){
+			String today=new SimpleDateFormat("yyyy-MM-dd").format(vo.getRegdate());
+			System.out.println(today);
+		}
+		
 		int totalPage=dao.boardTotalPage();
 		int block=5;
 		int fromPage=((curPage-1)/block*block)+1;
@@ -53,5 +58,16 @@ public class BoardController {
 		model.addAttribute("list", list);
 		
 		return "list";
+	}
+	
+	@RequestMapping("board/insert.do")
+	public String board_insert(){
+		return "insert";
+	}
+	
+	@RequestMapping("board/insert_ok.do")
+	public String board_insert_ok(BoardVO vo){
+		dao.boardInsert(vo);
+		return "redirect:/board/list.do";
 	}
 }

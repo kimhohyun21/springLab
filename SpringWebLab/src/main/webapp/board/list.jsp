@@ -54,13 +54,14 @@
 					<a href="content.do?page=${curPage}&no=${dto.no }">
 						${dto.subject }
 					</a>
-					<c:if test="${dto.dbday==today }">
+					<fmt:formatDate value="${dto.regdate }" var="regdate" pattern="yyyy-MM-dd"/>
+					<c:if test="${regdate==today }">
 						<sup><img src="img/icon_new (2).gif"></sup>
 					</c:if>	
 				</c:if>					
 				</td>
 				<td width="15%">${dto.name }</td>
-				<td width="20%">${dto.regdate }</td>
+				<td width="20%">${regdate }</td>
 				<td width="10%">${dto.hit }</td>		
 			</tr>
 		</c:forEach>
@@ -81,7 +82,7 @@
 						<img src="img/prev.gif">				 		
 				 	</a>
 				</c:if>	
-				<c:if test="${curPage<=block }">
+				<c:if test="${curPage<block }">
 					<a href="list.do?page=${curPage>1 ? curPage-1 : 1 }">
 						<img src="img/prev.gif">				 		
 				 	</a>

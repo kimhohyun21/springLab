@@ -9,6 +9,7 @@ import java.util.*;
 public class BoardVO {
 	private int no;
 	private String name;
+	private String email;
 	private String subject;
 	private String content;
 	private String pwd;
@@ -22,21 +23,6 @@ public class BoardVO {
 	private int root;
 	private int depth;
 	
-	private String today;
-	private String dbday;
-	
-	public String getToday() {
-		return today;
-	}
-	public void setToday(String today) {
-		this.today = today;
-	}
-	public String getDbday() {
-		return dbday;
-	}
-	public void setDbday(String dbday) {
-		this.dbday = dbday;
-	}
 	private String msg;
 	
 	public int getNo() {
@@ -47,6 +33,12 @@ public class BoardVO {
 	}
 	public String getName() {
 		return name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -110,7 +102,7 @@ public class BoardVO {
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
-	}
+	}	
 	public String getMsg() {
 		return msg;
 	}
