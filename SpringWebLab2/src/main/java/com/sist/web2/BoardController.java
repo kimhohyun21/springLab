@@ -1,4 +1,4 @@
-package com.sist.web;
+package com.sist.web2;
 
 import java.util.*;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sist.dao.BoardDAO;
-import com.sist.dao.BoardVO;
+import com.sist.dao2.BoardDAO;
+import com.sist.dao2.BoardVO;
 
 // /SpringWebLab/board/list.do
 

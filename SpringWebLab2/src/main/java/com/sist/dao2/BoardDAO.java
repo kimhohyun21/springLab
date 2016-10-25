@@ -1,4 +1,4 @@
-package com.sist.dao;
+package com.sist.dao2;
 
 import java.util.*;
 
