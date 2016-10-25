@@ -6,11 +6,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>상세보기</title>
-	<link rel="stylesheet" type="text/css" href="board/table.css">
+	<link rel="stylesheet" type="text/css" href="table.css">
 </head>
 <body>
-	<h3 id="title">내용보기</h3>
 	<div align="center">
+		<h3>내용보기</h3>
 		<table id="content_table">
 			<tr class="cont_tr">
 				<th width="25%">번호</th>
@@ -40,22 +40,22 @@
 			<tr>
 				<td id="right_td">
 					<a href="list.do?page=${page }">
-						<img alt="list button" src="board/img/btn_list.gif">
+						<img alt="list button" src="img/btn_list.gif">
 					</a>
-					<a href="reply.do?page=${page }&no=${dto.no }">
+					<a href="reply.do?page=${page }&no=${vo.no }">
 						<!-- 
 							reply.do ==request==> DispatcherServlet(controller)
 									 ===========> ReplyModel(처리)
 									 ===========> DispatcherServlet(controller)
 									 ==response=> jsp(view)
 						 -->
-						<img alt="reply button" src="board/img/btn_reply.gif">
+						<img alt="reply button" src="img/btn_reply.gif">
 					</a>
-					<a href="modify.do?page=${page }&no=${dto.no }">
-						<img alt="modify button" src="board/img/btn_modify.gif">
+					<a href="update.do?page=${page }&no=${vo.no }">
+						<img alt="modify button" src="img/btn_modify.gif">
 					</a>
-					<a href="delete.do?page=${page }&no=${dto.no }">
-						<img alt="delete button" src="board/img/btn_delete.gif">
+					<a href="delete.do?page=${page }&no=${vo.no }">
+						<img alt="delete button" src="img/btn_delete.gif">
 					</a>
 				</td>
 			</tr>

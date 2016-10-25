@@ -22,4 +22,23 @@ public class BoardDAO {
 	public void boardInsert(BoardVO vo){
 		mapper.boardInsert(vo);
 	}
+	
+	public BoardVO boardContent(String no){
+		mapper.boardHitIncrement(no);
+		return mapper.boardContentData(no);
+	}
+	
+	public BoardVO boardUpdate(int no){
+		return mapper.boardUpdate(no);
+	}
+	
+	public Boolean boardUpdatedata(BoardVO vo){
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPwd(vo.getNo());
+		if(db_pwd.equals(vo.getPwd())){
+			mapper.boardUpdateData(vo);
+			bCheck=true;
+		}		
+		return bCheck;
+	}
 }
