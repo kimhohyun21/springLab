@@ -23,7 +23,7 @@ public class BoardController {
 	
 	@Autowired
 	private BoardDAO dao;
-	
+	//리스트 읽어 오기
 	@RequestMapping("board/list.do")
 	public String board_list(Model model, String page){
 		if(page==null){page="1"; }
@@ -46,7 +46,9 @@ public class BoardController {
 		if(toPage>totalPage)toPage=totalPage;
 		
 		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		String msg="게시자에 의해 삭제된 게시물입니다.";
 		
+		model.addAttribute("msg", msg);
 		model.addAttribute("curPage", curPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("block", block);
@@ -58,23 +60,20 @@ public class BoardController {
 		return "list";
 	}
 	
+	//글쓰기
 	@RequestMapping("board/insert.do")
 	public String board_insert(){
 		return "insert";
 	}
 	
 	@RequestMapping("board/insert_ok.do")
-	@ResponseBody
 	public String board_insert_ok(BoardVO vo){
-		dao.boardInsert(vo);		
-		String result="<script type='text/javascript'>"
-				+ "alert('글이 작성 되었습니다.');"
-				+ "location.href='list.do'"
-				+ "</script>";
+		dao.boardInsert(vo);
 		
-		return result;
+		return "redirect:list.do";
 	}
 	
+	//상세보기
 	@RequestMapping("board/content.do") 
 	public String board_content(String no, String page, Model model){
 		BoardVO vo=dao.boardContent(no);
@@ -83,6 +82,7 @@ public class BoardController {
 		return "content";
 	}
 	
+	//수정하기
 	@RequestMapping("board/update.do")
 	public String board_update(int no, String page, Model model){
 		BoardVO vo=dao.boardUpdate(no);
@@ -112,6 +112,7 @@ public class BoardController {
 		return result;
 	}
 	
+	//답글달기
 	@RequestMapping("board/reply.do")
 	public String board_reply(String no, String page, Model model){
 		model.addAttribute("page", page);
@@ -119,10 +120,48 @@ public class BoardController {
 		return "reply";
 	}
 	
-	@RequestMapping("board/reply_ok")
-	public String board_reply_ok(String no, String page, Model model){
+	@RequestMapping("board/reply_ok.do")
+	public String board_reply_ok(String no, String page, BoardVO vo, Model model){
+		BoardVO pvo=dao.boardParentData(no);
+		dao.boardStepIncrement(pvo);
+		
+		vo.setGroup_id(pvo.getGroup_id());
+		vo.setGroup_step(pvo.getGroup_step()+1);
+		vo.setGroup_tab(pvo.getGroup_tab()+1);
+		
+		dao.boardReplyInsert(vo);
+		
+		dao.boardDepthIncrement(no);		
+		
 		model.addAttribute("page", page);
-		model.addAttribute("no", no);
-		return "list";
+		model.addAttribute("no", no);		
+		return "redirect:list.do";
+	}
+	
+	//삭제하기
+	@RequestMapping("board/delete.do")
+	public String board_delete(int no, String page, Model model){		
+		model.addAttribute("page", page);
+		model.addAttribute("no", no);		
+		return "delete";
+	}
+	
+	@RequestMapping("board/delete_ok.do")
+	@ResponseBody
+	public String board_delete_ok(int no, String page, String pwd){
+		boolean bCheck=dao.boardDelete(no, pwd);
+		String result="";
+		if(bCheck==false){
+			result="<script>"
+					+ "alert('비밀번호가 잘못되었습니다.');"
+					+ "history.back();"
+					+ "</script>";
+		}else{
+			result="<script>"
+					+ "alert('삭제 되었습니다.');"
+					+ "location.href='list.do?page="+page+"';"
+					+ "</script>";
+		}
+		return result;
 	}
 }

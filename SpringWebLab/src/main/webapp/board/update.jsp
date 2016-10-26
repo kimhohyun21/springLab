@@ -42,7 +42,7 @@
 </head>
 <body>
 	<div align="center">
-		<h3>글쓰기</h3>
+		<h3>수정하기</h3>
 		<form action="update_ok.do?page=${page }&no=${vo.no }" method="post" name="frm">
 			<table id="insert_table">
 				<tr>
@@ -79,7 +79,7 @@
 			<table class="button_table">
 				<tr>
 					<td align="center">
-						<input type="button" value="글쓰기" onclick="send()">
+						<input type="button" value="수정하기" onclick="send()">
 						<input type="reset" value="취소" onclick="javascript:history.back()">
 					</td>
 				</tr>

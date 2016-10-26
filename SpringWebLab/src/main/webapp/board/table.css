@@ -2,16 +2,19 @@
 table {
 	font-size: 11pt;	
 }
-#content_table, .button_table, #insert_table {
+#content_table, .button_table, #insert_table, #delete_table{
 	border-collapse: collapse;
 	width: 700px;
-	margin: 0px;
+	margin: 10px 0px 10px 0px;
 }
-#content_table, #insert_table {
+#delete_table{
+	width: 300px;
+}
+#content_table, #insert_table, #delete_table {
 	border-bottom: 2px solid black;
 	border-top: 2px solid black;	
 }
-#content_table th, #insert_table th {
+#content_table th, #insert_table th, #delete_table th {
 	background-color: #77c4ec;
 	color: #fff;
 	border-bottom: 1px solid #333;
@@ -22,14 +25,14 @@ table {
 	border-bottom: 1px solid #666;
 	padding: 5px;
 }
-#content_table td{
+#content_table td, #delete_table td{
 	border-bottom: 1px solid #666;
 	text-align: center;
 }
 #content_table tr:HOVER {
 	background-color: #d8eefa;
 }
-#content_table tr:NTH-CHILD(odd) {
+#content_table tr:NTH-CHILD(odd), #delete_table tr:NTH-CHILD(odd){
 	background-color: #d8eefa;
 }
 #content_table .cont_tr {
@@ -70,8 +73,9 @@ input[type="reset"],
 input[type="text"],
 input[type="password"],
 select, textarea{
-	-webkit-border-radius: 12px;
-	-mox-border-radius: 12px;
-	border-radius: 12px;
+	-webkit-border-radius: 10px;
+	-mox-border-radius: 10px;
+	border-radius: 10px;
 	border: 1px #CCC solid;
+	padding: 3px;
 }
