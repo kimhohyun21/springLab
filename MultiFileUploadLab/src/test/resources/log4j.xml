@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.sist.multipart">
+	<logger name="com.sist.mutifileupload">
 		<level value="info" />
 	</logger>
 	
