@@ -46,7 +46,7 @@ public class DataBoardController {
 		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		int block=5;
 		int fromPage=(block*curPage)-(block-1);
-		int toPage=totalPage-((block*curPage)-totalPage);
+		int toPage=(block*curPage)-totalPage;
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalPage", totalPage);
