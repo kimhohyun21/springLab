@@ -28,7 +28,7 @@ public class DataBoardController {
 	@Autowired
 	private DataBoardDAO dao;
 	
-	@RequestMapping("databoard/list.do")
+	@RequestMapping("list.do")
 	public String databoard_list(String page, Model model){
 		if(page==null){
 			page="1";
@@ -47,10 +47,11 @@ public class DataBoardController {
 		int totalPage=dao.dataBoardTotalPage();
 		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		int block=5;
-		int fromPage=(block*curPage)-(block-1);
-		int toPage=totalPage-(block*curPage);
+		int fromPage=(block*((curPage/5)+1))-(block-1);
+		int toPage=totalPage-(block*((curPage/5)+1));
 		if(toPage<totalPage)toPage=totalPage;
-		
+		System.out.println(fromPage);
+		System.out.println(toPage);
 		model.addAttribute("list", list);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("curPage", curPage);
@@ -61,12 +62,12 @@ public class DataBoardController {
 		return "databoard/list";
 	}
 	
-	@RequestMapping("databoard/insert.do")
+	@RequestMapping("insert.do")
 	public String databoard_insert(){
 		return "databoard/insert";
 	}
 	
-	@RequestMapping("databoard/insert_ok.do")
+	@RequestMapping("insert_ok.do")
 	public String databoard_insert_ok(DataBoardVO uploadForm)throws Exception{
 		List<MultipartFile> list=uploadForm.getFiles();
 		String temp="";
@@ -100,7 +101,25 @@ public class DataBoardController {
 		}
 		System.out.println(uploadForm.getSubject());
 		dao.dataBoardInsert(uploadForm);
-		return "redirect:/databoard/list.do";
+		return "redirect:/list.do";
+	}
+	
+	@RequestMapping("content.do")
+	public String databoard_content(int no, String page, Model model){
+		DataBoardVO vo=dao.dataBoardContentData(no);
+		
+		if(vo.getFilecount()!=0){
+			StringTokenizer file=new StringTokenizer(vo.getFilename(), ",");
+			List<String> nameList=new ArrayList<String>();
+			while(file.hasMoreTokens()){
+				nameList.add(file.nextToken());
+			}
+			vo.setNameList(nameList);	
+		}
+		
+		model.addAttribute("page", page);
+		model.addAttribute("vo", vo);
+		return "databoard/content";
 	}
 	
 }

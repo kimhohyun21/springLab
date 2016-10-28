@@ -7,16 +7,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>자료 리스트</title>
-	<link rel="stylesheet" type="text/css" href="table.css">
+	<link rel="stylesheet" type="text/css" href="databoard/table.css">
 </head>
 <body>
 	<div align="center">
-		<h3>자료실</h3>
+		<h3><a href="list.do">자료실</a></h3>
 		<table class="button_table">
 			<tr>
 				<td>
 					<a href="insert.do">
-						<img alt="write button" src="img/btn_write.gif">
+						<img alt="write button" src="databoard/img/btn_write.gif">
 					</a>
 				</td>
 			</tr>
@@ -38,7 +38,7 @@
 					</a>
 					<fmt:formatDate value="${dto.regdate }" var="regdate" pattern="yyyy-MM-dd"/>
 					<c:if test="${regdate==today }">
-						<sup><img src="img/icon_new (2).gif"></sup>
+						<sup><img src="databoard/img/icon_new (2).gif"></sup>
 					</c:if>				
 				</td>
 				<td width="15%">${dto.name }</td>
@@ -55,17 +55,17 @@
 					fp			tp	
 				 -->
 			 	<a href="list.do?page=1">
-			 		<img src="img/begin.gif">
+			 		<img src="databoard/img/begin.gif">
 			 	</a>
 			 	<!-- 기본적으로는 5페이지 단위로 페이지 이동, 처음 블록과 마지막 블록에서만 1페이지씩 이동 -->
 				<c:if test="${curPage>block }">
 					<a href="list.do?page=${fromPage-1}">
-						<img src="img/prev.gif">				 		
+						<img src="databoard/img/prev.gif">				 		
 				 	</a>
 				</c:if>	
 				<c:if test="${curPage<block }">
 					<a href="list.do?page=${curPage>1 ? curPage-1 : 1 }">
-						<img src="img/prev.gif">				 		
+						<img src="databoard/img/prev.gif">				 		
 				 	</a>
 				</c:if>
 				<c:forEach var="i" begin="${fromPage }" end="${toPage }">
@@ -84,16 +84,16 @@
 				</c:forEach>
 				<c:if test="${toPage<totalPage }">
 					<a href="list.do?page=${toPage+1 }">
-						<img src="img/next.gif">				 		
+						<img src="databoard/img/next.gif">				 		
 				 	</a>
 				</c:if>
 				<c:if test="${toPage>=totalPage }">
 					<a href="list.do?page=${curPage<totalPage ? curPage+1 : totalPage }">
-						<img src="img/next.gif">				 		
+						<img src="databoard/img/next.gif">				 		
 				 	</a>
 				</c:if>
 				<a href="list.do?page=${totalPage }">
-			 		<img src="img/end.gif">
+			 		<img src="databoard/img/end.gif">
 			 	</a>
 			 	&nbsp;
 			 	${curPage }page / ${totalPage }page 

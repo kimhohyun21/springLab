@@ -43,5 +43,6 @@
 		p:suffix=".jsp"
 	/>
 	
+	<!-- id 값은 고정되어 있음 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>

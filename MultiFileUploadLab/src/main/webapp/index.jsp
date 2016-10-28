@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Index</title>
 	<script type="text/javascript">
-		location.href="databoard/list.do";
+		location.href="list.do";
 	</script>
 </head>
 <body>

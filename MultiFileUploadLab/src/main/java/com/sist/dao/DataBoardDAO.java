@@ -21,4 +21,10 @@ public class DataBoardDAO {
 	public void dataBoardInsert(DataBoardVO vo){
 		mapper.dataBoardInsert(vo);
 	}
+	
+	public DataBoardVO dataBoardContentData(int no){
+		mapper.dataBoardHitIncrement(no);
+		DataBoardVO vo=mapper.dataBoardContentData(no);
+		return vo;
+	}
 }

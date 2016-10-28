@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 public interface DataBoardMapper {
 	
@@ -23,4 +24,10 @@ public interface DataBoardMapper {
 	@Insert("INSERT INTO multiBoard VALUES(#{no}, #{name}, #{subject}, "
 			+ "#{content}, #{pwd}, SYSDATE, 0, #{filename}, #{filesize}, #{filecount})")
 	public void dataBoardInsert(DataBoardVO vo);
+	
+	@Update("UPDATE multiBoard SET hit=hit+1 WHERE no=#{no}")
+	public void dataBoardHitIncrement(int no);
+	
+	@Select("SELECT no, name, subject, content, regdate, hit, filename, filesize, filecount FROM multiBoard WHERE no=#{no}")
+	public DataBoardVO dataBoardContentData(int no);
 }
