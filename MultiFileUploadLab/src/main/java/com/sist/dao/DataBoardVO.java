@@ -1,19 +1,21 @@
 package com.sist.dao;
 /*
- * no        NUMBER PRIMARY KEY,
-  name      VARCHAR2(34) NOT NULL ,
-  subject   VARCHAR2(2000) NOT NULL ,
-  content   CLOB NOT NULL ,
-  pwd       VARCHAR2(10) NOT NULL,
-  regdate   DATE,
-  hit       NUMBER,
-  filename  VARCHAR2(4000),
-  filesize  VARCHAR2(4000),
+  no        NUMBER 
+  name      VARCHAR2
+  subject   VARCHAR2
+  content   CLOB
+  pwd       VARCHAR2
+  regdate   DATE
+  hit       NUMBER
+  filename  VARCHAR2
+  filesize  VARCHAR2
   filecount NUMBER
+ 
  */
 import java.util.*;
 
 import org.springframework.web.multipart.MultipartFile;
+
 public class DataBoardVO {
 	private int no;
 	private String name;
@@ -26,9 +28,13 @@ public class DataBoardVO {
 	private String filesize;
 	private int filecount;
 	
-	private List<MultipartFile> files=new ArrayList<MultipartFile>(); //a.jpb,b.jpg,c.jpg
+	private List<MultipartFile> files=new ArrayList<MultipartFile>(); 
+	//a.jpg, b.jpg, c.jpg Ãß°¡
+	
 	private List<String> nameList=new ArrayList<String>();
 	private List<String> sizeList=new ArrayList<String>();
+	
+	private String dbday;
 	
 	public int getNo() {
 		return no;
@@ -48,14 +54,14 @@ public class DataBoardVO {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	public String getPwd() {
+		return pwd;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getPwd() {
-		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
@@ -89,7 +95,7 @@ public class DataBoardVO {
 	}
 	public void setFilecount(int filecount) {
 		this.filecount = filecount;
-	}
+	}	
 	public List<MultipartFile> getFiles() {
 		return files;
 	}
@@ -107,5 +113,11 @@ public class DataBoardVO {
 	}
 	public void setSizeList(List<String> sizeList) {
 		this.sizeList = sizeList;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
 	}
 }

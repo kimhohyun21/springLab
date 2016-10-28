@@ -4,137 +4,121 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="table.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-	var fileIndex=0;
-	$(function(){
-		$('#addBtn').click(function(){
-			$('.fileView').append(
-				'<tr id=f'+fileIndex+'>'
-					+'<td widht=20%>파일'+(fileIndex+1)+'</td>'
-					+'<td width=80% align=left>'
-						+'<input type=file name=files['+fileIndex+'] size=30>'
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<title>글쓰기</title>
+	<link rel="stylesheet" type="text/css" href="table.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		function enter(){
+			if(event.keyCode==13){
+				send();	
+			}
+		};
+		
+		function send(){			
+			//계층구조 : window ==> document ==> form ==> input
+			var f=document.frm;
+			if(f.name.value==""){
+				alert('이름을 입력해주세요.');
+				f.name.focus();
+				return;
+			}
+			if(f.subject.value==""){
+				alert('제목을 입력해주세요.');
+				f.subject.focus();
+				return;
+			}
+			if(f.content.value==""){
+				alert('내용을 입력해주세요.');
+				f.content.focus();
+				return;
+			}
+			if(f.pwd.value==""){
+				alert('비밀번호를 입력해주세요.');
+				f.pwd.focus();
+				return;
+			}
+			f.submit();
+		}; 
+		
+		var fileIndex=0;
+		$(function(){
+			$('#addBtn').click(function(){
+				$('.fileView').append(
+					'<tr id=f'+fileIndex+'>'
+					+"<td width=20% align=center style='border-bottom: 0px;'>파일"+(fileIndex+1)+"</td>"
+					+"<td width=80% style='border-bottom: 0px;'>"
+					+'<input type=file name=files['+fileIndex+'] size=30>'
 					+'</td>'
-				+'</tr>'
-			);
-			fileIndex=fileIndex+1;
+					+'</tr>'
+				);
+				fileIndex=fileIndex+1;
+			});
+			
+			$('#removeBtn').click(function(){
+				/*추가하면서 마지막으로 fileIndex가 +1이 되어 있기 때문에 마지막 객체는 fileIndex-1*/
+				$('#f'+(fileIndex-1)).remove();
+				fileIndex=fileIndex-1;
+			});
 		});
-		$('#removeBtn').click(function(){
-			$('#f' +(filesize-1)).remove();
-			fileIndex=fileIndex-1;
-		});
-	});
-	
-	function send(){
-		var f=document.frm;
-		if(f.name.value==""){
-			alert("이름을 입력하세요.");
-			f.name.focus();
-			return;
-		}
-		if(f.subject.value==""){
-			alert("제목을 입력하세요.");
-			f.subject.focus();
-			return;
-		}
-		if(f.content.value==""){
-			alert("내용을 입력하세요.");
-			f.content.focus();
-			return;
-		}
-		if(f.pwd.value==""){
-			alert("비밀번호를 입력하세요.");
-			f.pwd.focus();
-			return;
-		}
-		f.submit();
-	}
-</script>
+	</script>
 </head>
 <body>
-	<center>
+	<div align="center">
 		<h3>글쓰기</h3>
-		<form:form method="post" action="insert_ok.do" name="frm"
-			enctype="multipart/form-data"
-			modelAttribute="uploadForm">
-			<table width="700" id="table_content">
-				<tr height="27">
-					<td width="20%" align="center">이름</td>
-					<td width="80%" align="left">
-						<input type="text" size="10" name="name">
-					</td>
-				</tr>
-				
-				<tr height="27">
-					<td width="20%" align="center">제목</td>
-					<td width="80%" align="left">
-						<input type="text" size="45" name="subject">
-					</td>
-				</tr>
-				
-				<tr height="27">
-					<td width="20%" align="center">제목</td>
-					<td width="80" align="left">
-						<textarea rows="8" cols="46" name="content"></textarea>
-					</td>
-				</tr>
-				
+		<form:form action="insert_ok.do" method="post" name="frm"
+			enctype="multipart/form-data" modelAttribute="uploadForm">
+			<table id="insert_table">
 				<tr>
-					<td width="20%" align="center">첨부파일</td>
-					<td width="80%" align="left">
-						<table id="table_cotent" width="560">
+					<th width="20%">이름</th>
+					<td>
+						<input type="text" size="15" name="name" onkeydown="enter()">
+					</td>
+				</tr>
+				<tr>
+					<th width="20%">제목</th>
+					<td>
+						<input type="text" size="50" name="subject" onkeydown="enter()">
+					</td>
+				</tr>
+				<tr>
+					<th width="20%">내용</th>
+					<td>
+						<textArea cols="52" rows="10" name="content"></textArea>
+					</td>
+				</tr>
+				<tr>
+					<th width="20%">첨부파일</th>
+					<td>
+						<table>
 							<tr>
-								<td colspan="2" align="right">
+								<td style="border-bottom: 0px;">
 									<input type="button" value="추가" id="addBtn">
-									<input type="button" value="취소" id="removeBtn">
+									<input type="reset" value="삭제" id="removeBtn">
 								</td>
 							</tr>
 						</table>
-						<table id="table_content" width="560" class="fileView">
+						<table class="fileView">
+							
 						</table>
 					</td>
 				</tr>
-				<tr height="27">
-					<td width="20%" align="center">비밀번호</td>
-					<td width="80%" align="left">		
-						<input type="password" size="10" name="pwd">
-					</td>
-				</tr>
 				<tr>
-					<td colspan="2" align="center">
-						<input type="button" value="글쓰기" onclick="send()">
-						<input type="button" value="취소" onclick="javascipt:history.back()">
+					<th width="20%">비밀번호</th>
+					<td>
+						<input type="password" size="15px" name="pwd" onkeydown="enter()">
 					</td>
 				</tr>
 			</table>
+			<table class="button_table">
+				<tr>
+					<td align="center">
+						<input type="button" value="글쓰기" onclick="send()">
+						<input type="reset" value="취소" onclick="javascript:history.back()">
+					</td>
+				</tr>
+			</table>	
 		</form:form>
-	</center>
+	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

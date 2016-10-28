@@ -1,71 +1,81 @@
 @CHARSET "EUC-KR";
-
-table{
-	border-collapse: collapse;;
+table {
+	font-size: 11pt;	
 }
-#table_content{
-	border-top: 3px solid black;
-	border-bottom: 2px solid black;	
+#content_table, .button_table, #insert_table, #delete_table{
+	border-collapse: collapse;
+	width: 700px;
+	margin: 10px 0px 10px 0px;
 }
-#table_content th{
-	background-color: #f8cbcb;
+#delete_table{
+	width: 300px;
+}
+#content_table, #insert_table, #delete_table {
+	border-bottom: 2px solid black;
+	border-top: 2px solid black;	
+}
+#content_table th, #insert_table th, #delete_table th {
+	background-color: #77c4ec;
 	color: #fff;
-	border-bottom-width: 1px;
-	border-bottom-color: #333;
-	border-bottom: 1px solid;
-	font-size: 12pt;
-	height: 30px;
+	border-bottom: 1px solid #333;
+	text-align: center;
+	font-weight: bolder;
 }
-
-#table_content td{
-	border-bottom-width: 1px;
-	border-bottom-color: #666;
-	border-bottom: 1px solid;
-	font-size: 10pt;
-	height: 25px;
+#insert_table td {
+	border-bottom: 1px solid #666;
+	padding: 5px;
 }
-#subject {
+#content_table td, #delete_table td{
+	border-bottom: 1px solid #666;
+	text-align: center;
+}
+#content_table tr:HOVER {
+	background-color: #d8eefa;
+}
+#content_table tr:NTH-CHILD(odd), #delete_table tr:NTH-CHILD(odd){
+	background-color: #d8eefa;
+}
+#content_table .cont_tr {
+	background-color: #d8eefa;
+}
+#content_table #cont {
+	background-color: white;
+	padding: 10px;
 	text-align: left;
+	vertical-align: top;
+	height: 200px;
 }
-a{
+#content_table #left_td {
+	text-align: left;
+	padding-left: 10px;
+}
+.button_table #right_td {
+	text-align: right;
+	padding-top: 5px;
+}
+form, select, option {
+	font-weight: bolder;
+}
+a {
 	text-decoration: none;
 	color: black;
 }
-#page{
-	font-size: 12px;
-	background-color: #fadcdc;
+a:HOVER {
+	color: green;
 }
-
-#content{
-	text-align: left;
+img:HOVER {
+	opacity: 0.5;
+	border: 1px solid white;
 }
-.tdcenter{
-	text-align: center;
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="text"],
+input[type="password"],
+select, textarea{
+	-webkit-border-radius: 10px;
+	-mox-border-radius: 10px;
+	border-radius: 10px;
+	border: 1px #CCC solid;
+	padding: 3px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
