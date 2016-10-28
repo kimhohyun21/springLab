@@ -6,15 +6,17 @@ import java.util.*;
 
 @Repository
 public class DataBoardDAO {
-	
 	@Autowired
 	private DataBoardMapper mapper;
 	
-	public List<DataBoardVO> dataBoardListData(Map map){		
+	public List<DataBoardVO> databoardListData(Map map){
 		return mapper.dataBoardListData(map);
 	}
-	
-	public int dataBoardTotalPage(){
+	public int databoardTotalPage(){
 		return mapper.dataBoardTotalPage();
+	}
+	
+	public void databoardInsert(DataBoardVO vo){
+		mapper.dataBoardInsert(vo);
 	}
 }
