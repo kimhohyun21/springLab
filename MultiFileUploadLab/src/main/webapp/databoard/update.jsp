@@ -74,7 +74,7 @@
 					<td>
 						<input type="text" size="15" name="name" value="${vo.name }" onkeydown="enter()">
 						<input type="hidden" name="page" value="${page }">
-						<input type="hidden" name="no" value="${no }">
+						<input type="hidden" name="no" value="${vo.no }">
 					</td>
 				</tr>
 				<tr>
