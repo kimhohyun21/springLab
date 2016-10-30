@@ -32,10 +32,12 @@
 			</tr>
 			<tr class="cont_tr">
 				<th width="20%">Ã·ºÎÆÄÀÏ</th>
-				<td id="left_td" colspan="3">			
+				<td id="left_td" colspan="3">
+			<c:if test="${vo.filecount!=0 }">				
 				<c:forEach var="file" items="${vo.nameList }">
-						${file }&nbsp;
-				</c:forEach>	
+						<a href="download.do?fn=${file }">${file }</a>&nbsp;
+				</c:forEach>
+			</c:if>		
 				</td>
 			</tr>
 			<tr class="cont_tr">
@@ -57,8 +59,8 @@
 						 -->
 						<img alt="reply button" src="databoard/img/btn_reply.gif">
 					</a>
-					<a href="modify.do?page=${page }&no=${vo.no }">
-						<img alt="modify button" src="databoard/img/btn_modify.gif">
+					<a href="update.do?page=${page }&no=${vo.no }">
+						<img alt="update button" src="databoard/img/btn_modify.gif">
 					</a>
 					<a href="delete.do?page=${page }&no=${vo.no }">
 						<img alt="delete button" src="databoard/img/btn_delete.gif">

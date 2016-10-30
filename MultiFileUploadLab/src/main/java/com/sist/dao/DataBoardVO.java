@@ -32,7 +32,6 @@ public class DataBoardVO {
 	//a.jpg, b.jpg, c.jpg Ãß°¡
 	
 	private List<String> nameList=new ArrayList<String>();
-	private List<String> sizeList=new ArrayList<String>();
 	
 	private String dbday;
 	
@@ -107,12 +106,6 @@ public class DataBoardVO {
 	}
 	public void setNameList(List<String> nameList) {
 		this.nameList = nameList;
-	}
-	public List<String> getSizeList() {
-		return sizeList;
-	}
-	public void setSizeList(List<String> sizeList) {
-		this.sizeList = sizeList;
 	}
 	public String getDbday() {
 		return dbday;
