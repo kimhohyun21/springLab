@@ -50,15 +50,6 @@
 					<a href="list.do?page=${page }">
 						<img alt="list button" src="databoard/img/btn_list.gif">
 					</a>
-					<a href="reply.do?page=${page }&no=${vo.no }">
-						<!-- 
-							reply.do ==request==> DispatcherServlet(controller)
-									 ===========> ReplyModel(Ã³¸®)
-									 ===========> DispatcherServlet(controller)
-									 ==response=> jsp(view)
-						 -->
-						<img alt="reply button" src="databoard/img/btn_reply.gif">
-					</a>
 					<a href="update.do?page=${page }&no=${vo.no }">
 						<img alt="update button" src="databoard/img/btn_modify.gif">
 					</a>

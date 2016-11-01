@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
@@ -50,4 +51,7 @@ public interface DataBoardMapper {
 			+ "filecount=#{filecount, jdbcType=INTEGER} "
 			+ "WHERE no=#{no}")
 	public void dataBoardUpdate(DataBoardVO vo);
+	
+	@Delete("DELETE FROM multiboard WHERE no=#{no}")
+	public void dataBoardDelete(int no);
 }

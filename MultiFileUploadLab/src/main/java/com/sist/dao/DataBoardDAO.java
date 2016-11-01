@@ -78,4 +78,8 @@ public class DataBoardDAO {
 	public void dataBoardUpdate(DataBoardVO vo){
 		mapper.dataBoardUpdate(vo);
 	}
+	
+	public void dataBoardDelete(int no){
+		mapper.dataBoardDelete(no);
+	}
 }

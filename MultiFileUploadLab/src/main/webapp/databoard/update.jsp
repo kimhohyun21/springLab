@@ -115,7 +115,7 @@
 			<table class="button_table">
 				<tr>
 					<td align="center">
-						<input type="button" value="글쓰기" onclick="send()">
+						<input type="button" value="수정하기" onclick="send()">
 						<input type="reset" value="취소" onclick="javascript:history.back()">
 					</td>
 				</tr>

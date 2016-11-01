@@ -46,18 +46,20 @@ public class DataBoardController {
 		int rowSize=10;
 		int start=(rowSize*curPage)-(rowSize-1);
 		int end=rowSize*curPage;
+		System.out.println(start);
+		System.out.println(end);
 		map.put("start", start);
 		map.put("end", end);
 		
 		List<DataBoardVO> list=dao.dataBoardListData(map);
+		System.out.println(list.size());
 		int totalPage=dao.dataBoardTotalPage();
 		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		int block=5;
 		int fromPage=(block*((curPage/5)+1))-(block-1);
 		int toPage=totalPage-(block*((curPage/5)+1));
 		if(toPage<totalPage)toPage=totalPage;
-		System.out.println(fromPage);
-		System.out.println(toPage);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("curPage", curPage);
@@ -99,7 +101,7 @@ public class DataBoardController {
 			uploadForm.setFilesize("");
 			uploadForm.setFilecount(0);
 		}
-		System.out.println(uploadForm.getSubject());
+		
 		dao.dataBoardInsert(uploadForm);
 		return "redirect:/list.do";
 	}
@@ -107,7 +109,7 @@ public class DataBoardController {
 	@RequestMapping("content.do")
 	public String databoard_content(int no, String page, Model model){
 		DataBoardVO vo=dao.dataBoardContentData(no);
-		
+		System.out.println(no);
 		if(vo.getFilecount()!=0){
 			StringTokenizer file=new StringTokenizer(vo.getFilename(), ",");
 			List<String> nameList=new ArrayList<String>();
@@ -165,7 +167,6 @@ public class DataBoardController {
 	
 	@RequestMapping("update_ok.do")
 	public String databoard_update_ok(DataBoardVO uploadForm, String page, Model model) throws Exception{
-		System.out.println("테스트");
 		//비밀번호를 비교하기 위해 DB에서 받아오기
 		String dbpwd=dao.dataBoardGetPwd(uploadForm.getNo());
 		
@@ -217,5 +218,37 @@ public class DataBoardController {
 		model.addAttribute("bCheck", bCheck);
 		model.addAttribute("page", page);
 		return "databoard/update_ok";	
+	}
+	
+	@RequestMapping("delete.do")
+	public String databoard_delete(int no, String page, Model model){
+		model.addAttribute("no", no);
+		model.addAttribute("page", page);
+		return "databoard/delete";
+	}
+	
+	@RequestMapping("delete_ok.do")
+	public String databoard_delete_ok(int no, String pwd, String page, Model model){
+		String dbpwd=dao.dataBoardGetPwd(no);
+		DataBoardVO vo=dao.dataBoardGetDeleteFile(no);
+		
+		boolean bCheck=false;
+		if(pwd.equals(dbpwd)){
+			//저장된 파일 삭제
+			if(vo.getFilecount()!=0){
+				String temp=vo.getFilename();
+				StringTokenizer st=new StringTokenizer(temp, ",");
+				while(st.hasMoreTokens()){
+					File file=new File("c:\\download\\"+st.nextToken());
+					file.delete();
+				}
+			}
+			bCheck=true;		
+			dao.dataBoardDelete(no);
+		}
+		
+		model.addAttribute("bCheck", bCheck);
+		model.addAttribute("page", page);
+		return "databoard/delete_ok";
 	}
 }
