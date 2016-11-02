@@ -1,0 +1,21 @@
+@CHARSET "EUC-KR";
+a{
+	text-decoration: none;
+	color: black;
+}
+#emplist{
+	width: 1280px; 
+	height: 600px; 
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+#emplist tr, #emplist th, #emplist td{
+	border: 1px solid gray;
+}
+#emplist th{
+	background-color: #c7c7c7;
+}
+#emplist td{
+	text-align: center;
+}
