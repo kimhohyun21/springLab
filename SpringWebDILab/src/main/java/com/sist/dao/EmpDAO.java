@@ -13,4 +13,8 @@ public class EmpDAO {
 	public List<EmpVO> empdeptAllData(){
 		return mapper.empdeptAllData();
 	}
+	
+	public EmpVO empdeptFindData(int no){
+		return mapper.empdeptFindData(no);
+	}
 }

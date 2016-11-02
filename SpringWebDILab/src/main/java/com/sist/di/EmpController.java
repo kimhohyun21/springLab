@@ -22,4 +22,13 @@ public class EmpController {
 		
 		return "emp/list";
 	}
+	
+	@RequestMapping("find.do")
+	public String empFindData(int no, Model model){
+		
+		EmpVO vo=dao.empdeptFindData(no);
+		model.addAttribute("vo", vo);
+		
+		return "emp/find";
+	}
 }
