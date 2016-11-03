@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="db" class="com.sist.dao.DBConnection"
+		p:url="jdbc:oracle:thin:@211.238.142.88:1521:ORCL"
+		p:username="scott"
+		p:password="tiger">
+		<constructor-arg>
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</constructor-arg>		
+	</bean>
+	
+	<!-- 부가기능(Advice)를 호출하는 클래스(Bean) -->
+	<bean id="aspect" class="com.sist.aspect.DBAspect"
+		p:dbcon-ref="db"
+	/>
+	
+	<!-- 핵심 기능(Target)을 가진 클래스(Bean) 등록 -->
+	<bean id="dao" class="com.sist.dao.EmpDAO"
+		p:dbcon-ref="db"
+	/>
+	
+	<aop:config>
+		<aop:aspect ref="aspect">
+			<aop:before method="getConnection"
+				pointcut="execution(* com.sist.dao.EmpDAO.*(..))" 
+			/> <!-- execution(정규식)==> 리턴타입 / 타깃 / 매개변수 ==> * / com.sist.dao.EmpDAO.* / (..) -->
+			<aop:after method="disConnection"
+				pointcut="execution(* com.sist.dao.EmpDAO.*(..))"
+			/>
+		</aop:aspect>
+	</aop:config>
+</beans>
